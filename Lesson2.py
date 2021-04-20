@@ -2,15 +2,15 @@ import requests
 import bs4
 from pathlib import Path
 from urllib.parse import urljoin
-# import pymongo
+import pymongo
 import time
 
 
 class MagnitParse:
     def __init__(self, start_url, db_client):
         self.start_url = start_url
-        # self.db = db_client["gb_data_mining_29_03_2021"]
-        # self.collection = self.db["magnit_products"]
+        self.db = db_client["magnit_data_mining"]
+        self.collection = self.db["products"]
 
     def _get_response(self, url):
         while True:
@@ -49,8 +49,7 @@ class MagnitParse:
             yield product
 
     def _save(self, data: dict):
-        # self.collection.insert_one(data)
-        pass
+        self.collection.insert_one(data)
 
 
 def get_save_path(dir_name):
@@ -63,7 +62,6 @@ def get_save_path(dir_name):
 if __name__ == "__main__":
     url = "https://magnit.ru/promo/"
     save_path = get_save_path("magnit_product")
-    # db_client = pymongo.MongoClient("mongodb://localhost:27017")
-    db_client = ""
+    db_client = pymongo.MongoClient("mongodb://localhost:27017")
     parser = MagnitParse(url, db_client)
     parser.run()
