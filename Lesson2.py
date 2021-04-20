@@ -45,8 +45,8 @@ class MagnitParse:
                     product[key] = funk(poduct_tag)
                 except(AttributeError, ValueError):
                     pass
-
-            yield product
+            if len(product) == 2:
+                yield product
 
     def _save(self, data: dict):
         self.collection.insert_one(data)
@@ -65,3 +65,4 @@ if __name__ == "__main__":
     db_client = pymongo.MongoClient("mongodb://localhost:27017")
     parser = MagnitParse(url, db_client)
     parser.run()
+    print(1)
