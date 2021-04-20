@@ -53,7 +53,7 @@ class MagnitParse:
         self.collection.insert_one(data)
 
     def show_product(self, name: str):
-        for itm in self.collection.find({'product_name': {'$regex': name}}):
+        for itm in self.collection.find({'product_name': {'$regex': r'.*'+name}}):
             print(itm)
 
 
