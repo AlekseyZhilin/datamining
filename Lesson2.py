@@ -45,6 +45,7 @@ class MagnitParse:
                     product[key] = funk(poduct_tag)
                 except(AttributeError, ValueError):
                     pass
+
             if len(product) == 2:
                 yield product
 
