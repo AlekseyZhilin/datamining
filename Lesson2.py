@@ -52,6 +52,10 @@ class MagnitParse:
     def _save(self, data: dict):
         self.collection.insert_one(data)
 
+    def show_product(self, name: str):
+        for itm in self.collection.find({'product_name': {'$regex': name}}):
+            print(itm)
+
 
 def get_save_path(dir_name):
     dir_path = Path(__file__).parent.joinpath(dir_name)
@@ -66,4 +70,4 @@ if __name__ == "__main__":
     db_client = pymongo.MongoClient("mongodb://localhost:27017")
     parser = MagnitParse(url, db_client)
     parser.run()
-    print(1)
+    parser.show_product('сок')
