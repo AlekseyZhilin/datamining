@@ -78,6 +78,6 @@ class GbBlogParse:
 
 
 if __name__ == "__main__":
-    db = Database("MySQL:///gb_blog.db")
+    db = Database("mysql+mysqlconnector:///gb_blog")
     parser = GbBlogParse("https://gb.ru/posts", db)
     parser.run()
